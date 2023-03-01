@@ -7,29 +7,28 @@ import { UserContext } from '../../../contexts/UserContext';
 import { StyledButton } from '../../../styles/button';
 import { StyledForm } from '../../../styles/form';
 import Input from '../Input';
-import { IRegisterUser } from '../../../contexts/UserContext/types';
+import { ILoginUser } from '../../../contexts/UserContext/types';
 
-type ILoginFormValues = Omit<IRegisterUser, 'name' | 'passwordConfirm'>;
+const schema = yup.object({
+  email: yup
+    .string()
+    .required('É preciso informar seu email')
+    .email('E-mail inválido'),
+  password: yup
+    .string()
+    .required('É preciso informar sua senha')
+    .matches(/.{6,}/, 'Deve conter no mínimo 6 caracteres'),
+});
 
 const LoginForm = () => {
   const { loginUser } = useContext(UserContext);
-
-  const schema = yup.object({
-    email: yup
-      .string()
-      .required('É preciso informar seu email')
-      .email('E-mail inválido'),
-    password: yup
-      .string()
-      .required('É preciso informar sua senha')
-      .matches(/.{6,}/, 'Deve conter no mínimo 6 caracteres'),
-  });
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ILoginFormValues>({ resolver: yupResolver(schema) });
+  } = useForm<ILoginUser>({ resolver: yupResolver(schema) });
+
   return (
     <StyledForm onSubmit={handleSubmit(loginUser)}>
       <Input

@@ -20,7 +20,6 @@ export const StyledTitle = styled(BaseTitle)<IStyledTitleProps>`
   text-align: ${({ textAlign }) => textAlign};
 
   ${({ $fontSize }) => {
-    // eslint-disable-next-line default-case
     switch ($fontSize) {
       case 'one':
         return css`

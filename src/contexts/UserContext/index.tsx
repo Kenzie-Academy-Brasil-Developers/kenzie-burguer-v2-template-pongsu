@@ -1,8 +1,9 @@
 import { createContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import axios, { AxiosError, isAxiosError } from 'axios';
+
 import {
   ILoginUser,
   IRegisterUser,
@@ -31,10 +32,12 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       navigate('/shop');
     } catch (error: unknown | AxiosError) {
       if (!axios.isAxiosError(error)) {
+        // eslint-disable-next-line no-console
         console.error(error);
       } else if (error.response?.data === 'Email already exists') {
         toast.warning('Email já cadastrado, faça o login');
       } else {
+        // eslint-disable-next-line no-console
         console.error(error);
       }
     } finally {
@@ -51,6 +54,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       toast.success('Seja bem vindo!');
       navigate('/shop');
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error(error);
     } finally {
       setLoading(false);

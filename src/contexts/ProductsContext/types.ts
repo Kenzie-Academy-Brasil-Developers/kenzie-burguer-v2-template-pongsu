@@ -15,6 +15,10 @@ export interface IProduct {
 export interface IProductsContext {
   productsList: IProduct[] | [];
   productsCartList: IProduct[];
+  productsFilterList: IProduct[] | [];
+  setProductsFilterList: React.Dispatch<React.SetStateAction<IProduct[]>>;
+  searchText: string;
+  setSearchText: React.Dispatch<React.SetStateAction<string>>;
   addToCart: (productID: number) => void;
   removeFromCart: (productID: number) => void;
   cleanCart: () => void;

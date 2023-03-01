@@ -12,8 +12,19 @@ export const ProductsContext = createContext<IProductsContext>(
 export const ProductsProvider = ({ children }: IProductsProviderProps) => {
   const [productsList, setProductsList] = useState<IProduct[]>([]);
   const [productsCartList, setProductsCartList] = useState<IProduct[]>([]);
+  const [productsFilterList, setProductsFilterList] = useState<IProduct[]>([]);
+  const [searchText, setSearchText] = useState<string>('');
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const filter = productsList.filter(
+      (element) =>
+        element.name.toLowerCase().includes(searchText.toLowerCase()) ||
+        element.category.toLowerCase().includes(searchText.toLowerCase())
+    );
+    setProductsFilterList(filter);
+  }, [searchText]);
 
   useEffect(() => {
     const authToken = window.localStorage.getItem('@TOKEN');
@@ -26,6 +37,7 @@ export const ProductsProvider = ({ children }: IProductsProviderProps) => {
             },
           });
           setProductsList(response.data);
+          setProductsFilterList(response.data);
         } catch (error) {
           window.localStorage.clear();
           setProductsList([]);
@@ -84,6 +96,10 @@ export const ProductsProvider = ({ children }: IProductsProviderProps) => {
         addToCart,
         removeFromCart,
         cleanCart,
+        productsFilterList,
+        setProductsFilterList,
+        searchText,
+        setSearchText,
       }}
     >
       {children}

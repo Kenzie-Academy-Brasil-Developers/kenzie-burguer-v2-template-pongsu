@@ -57,6 +57,18 @@ export const StyledButtonCSS = css<IStyledButtonProps>`
         `;
     }
   }}
+
+  .loading {
+    height: 40%;
+    width: auto;
+    animation: rotate 9s infinite;
+  }
+
+  @keyframes rotate {
+    100% {
+      transform: rotate(4800deg);
+    }
+  }
 `;
 
 export const StyledButton = styled.button<IStyledButtonProps>`

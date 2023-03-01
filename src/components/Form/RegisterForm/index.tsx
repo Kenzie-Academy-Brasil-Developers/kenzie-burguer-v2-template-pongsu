@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useContext } from 'react';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 import Input from '../Input';
 import { StyledButton } from '../../../styles/button';
@@ -14,7 +15,7 @@ interface IRegisterFormValues extends IRegisterUser {
 }
 
 const RegisterForm = () => {
-  const { registerUser } = useContext(UserContext);
+  const { registerUser, loading } = useContext(UserContext);
 
   const schema = yup.object({
     name: yup.string().required('É preciso informar seu nome'),
@@ -67,9 +68,20 @@ const RegisterForm = () => {
         register={register('passwordConfirm')}
         error={errors.passwordConfirm}
       />
-      <StyledButton type='submit' $buttonSize='default' $buttonStyle='gray'>
-        Cadastrar
-      </StyledButton>
+      {!loading ? (
+        <StyledButton type='submit' $buttonSize='default' $buttonStyle='gray'>
+          Cadastrar
+        </StyledButton>
+      ) : (
+        <StyledButton
+          type='button'
+          disabled
+          $buttonSize='default'
+          $buttonStyle='gray'
+        >
+          <AiOutlineLoading3Quarters className='loading' />
+        </StyledButton>
+      )}
     </StyledForm>
   );
 };

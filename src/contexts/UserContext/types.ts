@@ -30,4 +30,5 @@ export interface IUserContext {
   registerUser: (data: IRegisterUser) => Promise<void>;
   loginUser: (data: ILoginUser) => Promise<void>;
   logoutUser: () => void;
+  loading: boolean;
 }

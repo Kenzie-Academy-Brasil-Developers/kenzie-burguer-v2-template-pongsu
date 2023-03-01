@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 import { UserContext } from '../../../contexts/UserContext';
 import { StyledButton } from '../../../styles/button';
@@ -21,7 +22,7 @@ const schema = yup.object({
 });
 
 const LoginForm = () => {
-  const { loginUser } = useContext(UserContext);
+  const { loginUser, loading } = useContext(UserContext);
 
   const {
     register,
@@ -43,9 +44,20 @@ const LoginForm = () => {
         register={register('password')}
         error={errors.password}
       />
-      <StyledButton type='submit' $buttonSize='default' $buttonStyle='green'>
-        Entrar
-      </StyledButton>
+      {!loading ? (
+        <StyledButton type='submit' $buttonSize='default' $buttonStyle='green'>
+          Entrar
+        </StyledButton>
+      ) : (
+        <StyledButton
+          type='button'
+          disabled
+          $buttonSize='default'
+          $buttonStyle='green'
+        >
+          <AiOutlineLoading3Quarters className='loading' />
+        </StyledButton>
+      )}
     </StyledForm>
   );
 };

@@ -21,6 +21,7 @@
     "@typescript-eslint"
   ],
   "rules": {
+    "no-use-before-define": "off",
     "import/order": [
       "error",
       {
@@ -81,7 +82,10 @@
         "ts": "never",
         "tsx": "never"
       }
-    ]
+    ],
+    "consistent-return": "off",
+    "default-case": "off",
+    "no-param-reassign": "off"
   },
   "settings": {
     "import/resolver": {

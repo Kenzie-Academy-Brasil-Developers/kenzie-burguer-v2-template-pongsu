@@ -49,6 +49,7 @@ export const StyledButtonCSS = css<IStyledButtonProps>`
         return css`
           color: ${theme.colors.gray300};
           background: ${theme.colors.gray100};
+          width: 100%;
           &:hover {
             color: ${theme.colors.gray100};
             background: ${theme.colors.gray300};
